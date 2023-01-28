@@ -1,0 +1,45 @@
+startshape mickeyMouse[]
+CF::Background = [hue 0 saturation .9793 b .949]  // red
+
+
+// Mickey is a tan colored circle with a left and right ear.
+shape mickeyMouse{
+  leftMouseEar[]
+  rightMouseEar[]
+  CIRCLE[hue 33.75 saturation .251 b 1]
+}
+
+// A miniMouse is either a tan/black colored circle with ears
+
+// This allows for some recursive mice to have varying colored 
+//    "face" circles but distinguishes them from the main mickeyMouse 
+//    which always has a tan "face" circle.
+shape miniMouse
+rule{
+  leftMouseEar[]
+  rightMouseEar[]
+  CIRCLE[hue 33.75 saturation .251 b 1]
+}
+rule{
+  leftMouseEar[]
+  rightMouseEar[]
+  CIRCLE[]
+}
+
+// A left ear can be either a circle or a mouse itself
+shape leftMouseEar
+rule 75% {
+  miniMouse[x -0.5 y 0.5 s 0.5]
+}
+rule {
+  CIRCLE[x -0.5 y 0.5 s 0.5]
+}
+
+// A right ear can be either a circle or a mouse itself
+shape rightMouseEar
+rule 75%{
+  miniMouse[x 0.5 y 0.5 s 0.5]
+}
+rule {
+  CIRCLE[x 0.5 y 0.5 s 0.5]
+}
